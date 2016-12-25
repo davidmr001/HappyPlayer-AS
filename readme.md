@@ -18,10 +18,13 @@ mp3、ape、flac、wav等
 - 流畅、平滑的歌词滚动
 - 支持歌词字体大小、颜色修改
 - 支持歌词进度修改，可快进+0.5秒，-0.5秒
+
 #Hrc歌词制作器（播放器）
 https://github.com/zhangliangming/HappyPlayer-PC.git
+
 #测试资源地址
 将haplayer文件夹放到手机sd卡下，即可。附：http://pan.baidu.com/s/1pLtXVCJ
+
 #效果预览
 - ![](http://i.imgur.com/p3kkE0p.png)
 - ![](http://i.imgur.com/sNQ44vd.png)
