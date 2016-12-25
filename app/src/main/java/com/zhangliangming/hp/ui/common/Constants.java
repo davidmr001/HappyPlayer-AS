@@ -266,6 +266,7 @@ public class Constants {
     public static String[] lrcColorStr = {"#fcff15", "#6ee84d", "#fe6565",
             "#ffa144", "#3cdbe1", "#cc58f2"};
 
+
     /**
      * 歌词最小大小
      */
