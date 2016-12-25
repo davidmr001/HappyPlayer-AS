@@ -23,10 +23,9 @@ https://github.com/zhangliangming/HappyPlayer-PC.git
 #测试资源地址
 将haplayer文件夹放到手机sd卡下，即可。附：http://pan.baidu.com/s/1pLtXVCJ
 #效果预览
-
-
-- ![](http://pan.baidu.com/s/1nuKQfaT)
-- ![](http://pan.baidu.com/s/1dFHYQ3J)
-- ![](http://pan.baidu.com/s/1qXUTwwk)
-- ![](http://pan.baidu.com/s/1gfdZj4B)
-- ![](http://pan.baidu.com/s/1pLO0dC3)
+- ![](http://i.imgur.com/p3kkE0p.png)
+- ![](http://i.imgur.com/sNQ44vd.png)
+- ![](http://i.imgur.com/kcOQ2Ti.png)
+- ![](http://i.imgur.com/7UwShO5.gif)
+- ![](http://i.imgur.com/Egwcfxs.gif)
+- ![](http://i.imgur.com/2AWctNB.gif)
