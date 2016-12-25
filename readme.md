@@ -19,3 +19,6 @@ mp3、ape、flac、wav等
 - 支持歌词字体大小、颜色修改
 - 支持歌词进度修改，可快进+0.5秒，-0.5秒
 
+#Hrc歌词制作器（播放器）
+https://github.com/zhangliangming/HappyPlayer-PC.git
+
