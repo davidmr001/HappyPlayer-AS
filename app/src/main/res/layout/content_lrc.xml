@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/statusBarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"></LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_below="@+id/statusBarView"
+            android:background="@color/titleBG">
+
+            <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+                android:id="@+id/backParent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:clickable="true">
+
+                <com.zhangliangming.hp.ui.widget.BaseImageView
+                    android:id="@+id/title_user_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/title_back_icon"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/title_back_icon_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/padding"
+                    android:layout_toRightOf="@+id/title_user_icon"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="#ffffff" />
+
+            </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:gravity="center|center_horizontal"
+                android:text="歌手-歌名"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/titleView"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:id="@+id/lrcView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/seekbar"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp">
+
+                <com.zhangliangming.hp.ui.widget.ManyLineLyricsView
+                    android:id="@+id/manyLineLyricsView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/content_lrc_foot" />
+
+            <include layout="@layout/content_lrc_seekbar" />
+        </RelativeLayout>
+
+        <include layout="@layout/lrc_popup_menu" />
+    </RelativeLayout>
+</LinearLayout>

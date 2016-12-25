@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/playBar">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <com.zhangliangming.hp.ui.widget.LinearLayoutRecyclerView
+                android:id="@+id/localPlayListview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:cacheColorHint="@null"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/localDialog"
+            android:layout_width="80.0dip"
+            android:layout_height="80.0dip"
+            android:layout_gravity="center"
+            android:background="@mipmap/bg_tip"
+            android:gravity="center"
+            android:textColor="#ffffffff"
+            android:textSize="30.0dip"
+            android:visibility="invisible" />
+
+        <com.zhangliangming.hp.ui.widget.SlideBar
+            android:id="@+id/localSlideBar"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom" />
+    </FrameLayout>
+
+</LinearLayout>

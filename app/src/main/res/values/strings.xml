@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">乐乐音乐4</string>
+    <string name="exit_tip">再按一次退出程序</string>
+    <string name="def_artist">传播好音乐</string>
+    <string name="def_songName">乐乐音乐</string>
+
+    <!-- 图标图片 -->
+    <string name="title_user_icon">&#xe621;</string>
+    <string name="title_scan_icon">&#xe608;</string>
+    <string name="def_artist_icon">&#xe61c;</string>
+    <string name="bar_pre_icon">&#xe610;</string>
+    <string name="bar_next_icon">&#xe600;</string>
+    <string name="bar_play_icon">&#xe6c5;</string>
+    <string name="bar_pause_icon">&#xe62a;</string>
+    <string name="title_back_icon">&#xe601;</string>
+    <string name="finish_icon">&#xe623;</string>
+
+    <string name="mode_random_def_icon">&#xe6f1;</string>
+    <string name="mode_random_pressed_icon">&#xe6f1;</string>
+
+    <string name="mode_all1_def_icon">&#xe609;</string>
+    <string name="mode_all1_pressed_icon">&#xe609;</string>
+
+    <string name="mode_single_def_icon">&#xe61f;</string>
+    <string name="mode_single_pressed_icon">&#xe61f;</string>
+
+    <string name="mode_all_def_icon">&#xe688;</string>
+    <string name="mode_all_pressed_icon">&#xe688;</string>
+
+    <string name="play_def_icon">&#xe6fe;</string>
+    <string name="play_pressed_icon">&#xe631;</string>
+
+    <string name="pause_def_icon">&#xe682;</string>
+    <string name="pause_pressed_icon">&#xe669;</string>
+
+    <string name="pre_def_icon">&#xe607;</string>
+    <string name="pre_pressed_icon">&#xe707;</string>
+
+    <string name="next_def_icon">&#xe627;</string>
+    <string name="next_pressed_icon">&#xe708;</string>
+
+    <string name="menu_button_icon">&#xe6a3;</string>
+
+    <string name="lyric_font_size_decrease_icon">&#xe6f6;</string>
+    <string name="lyric_font_size_increase_icon">&#xe6f9;</string>
+
+    <string name="lyric_progress_increase_icon">&#xe636;</string>
+    <string name="lyric_progress_decrease_icon">&#xe6af;</string>
+</resources>

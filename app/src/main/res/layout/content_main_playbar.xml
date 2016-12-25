@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/playBar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/player_height"
+    android:layout_alignParentBottom="true"
+    android:clickable="true">
+
+    <com.zhangliangming.hp.ui.widget.DividerView
+        android:layout_width="match_parent"
+        android:layout_height="1dip" />
+
+    <com.zhangliangming.hp.ui.widget.BaseSeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_alignParentBottom="true"
+        android:max="100"
+        android:progress="0"
+        android:secondaryProgress="0"
+        android:thumb="@null" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/seekBar">
+
+        <com.zhangliangming.hp.ui.widget.BaseImageView
+            android:id="@+id/play_bar_def_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/def_artist_icon"
+            android:textColor="@color/def_bar_title_color"
+            android:textSize="@dimen/player_Imageview_size" />
+
+        <TextView
+            android:id="@+id/songName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/play_bar_def_artist"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_toLeftOf="@+id/preParent"
+            android:layout_toRightOf="@+id/play_bar_def_artist"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/def_songName"
+            android:textColor="@color/def_bar_title_color"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/artistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/songName"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/play_bar_def_artist"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@string/def_artist"
+            android:textColor="@color/def_bar_title_color"
+            android:textSize="12dp" />
+
+
+        <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+            android:id="@+id/preParent"
+            android:layout_width="@dimen/player_buttonbg_width"
+            android:layout_height="@dimen/player_buttonbg_height"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/pauseParent"
+            android:clickable="true">
+
+            <com.zhangliangming.hp.ui.widget.BaseImageView
+                android:id="@+id/preButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="5dp"
+                android:text="@string/bar_pre_icon"
+                android:textColor="@color/def_bar_title_color"
+                android:textSize="@dimen/player_bv_size" />
+        </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+        <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+            android:id="@+id/pauseParent"
+            android:layout_width="@dimen/player_buttonbg_width"
+            android:layout_height="@dimen/player_buttonbg_height"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/nextParent"
+            android:clickable="true">
+
+            <com.zhangliangming.hp.ui.widget.BaseImageView
+                android:id="@+id/pauseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="5dp"
+                android:text="@string/bar_pause_icon"
+                android:textColor="@color/def_bar_title_color"
+                android:textSize="@dimen/player_bv_size" />
+        </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+        <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+            android:id="@+id/playParent"
+            android:layout_width="@dimen/player_buttonbg_width"
+            android:layout_height="@dimen/player_buttonbg_height"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/nextParent"
+            android:clickable="true"
+            android:visibility="invisible">
+
+            <com.zhangliangming.hp.ui.widget.BaseImageView
+                android:id="@+id/playButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="5dp"
+                android:text="@string/bar_play_icon"
+                android:textColor="@color/def_bar_title_color"
+                android:textSize="@dimen/player_bv_size" />
+        </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+        <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+            android:id="@+id/nextParent"
+            android:layout_width="@dimen/player_buttonbg_width"
+            android:layout_height="@dimen/player_buttonbg_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:textColor="@color/def_bar_title_color">
+
+            <com.zhangliangming.hp.ui.widget.BaseImageView
+                android:id="@+id/nextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="5dp"
+                android:text="@string/bar_next_icon"
+                android:textColor="@color/def_bar_title_color"
+                android:textSize="@dimen/player_bv_size" />
+        </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

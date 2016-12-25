@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_scan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="com.zhangliangming.hp.ui.ScanActivity">
+
+    <LinearLayout
+        android:id="@+id/statusBarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"></LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/titleBG">
+
+        <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+            android:id="@+id/backParent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:clickable="true">
+
+            <com.zhangliangming.hp.ui.widget.BaseImageView
+                android:id="@+id/title_user_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/title_back_icon"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/title_back_icon_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/padding"
+                android:layout_toRightOf="@+id/title_user_icon"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="#ffffff" />
+
+        </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="扫描音乐"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/img_mediascan_logo" />
+
+        <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+            android:id="@+id/scanParent"
+            android:layout_width="fill_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:clickable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="点击此处,一键扫描"
+                android:textColor="@color/def_bar_title_color"></TextView>
+        </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

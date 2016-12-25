@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popMenuParent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:id="@+id/pop_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/lrcProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="歌词进度"
+                android:textColor="@color/def_bar_title_color"></TextView>
+
+            <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+                android:id="@+id/lrcDecreaseIconParent"
+                android:layout_width="75dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/lrcProgress"
+                android:clickable="true">
+
+                <com.zhangliangming.hp.ui.widget.BaseImageView
+                    android:id="@+id/lrcDecreaseIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lyric_progress_decrease_icon"
+                    android:textColor="@color/def_bar_title_color"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
+                    android:layout_toRightOf="@+id/lrcDecreaseIconc"
+                    android:text="-0.5秒"
+                    android:textColor="@color/def_bar_title_color"></TextView>
+
+            </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/lrcIncreaseIconParent"
+                android:layout_toRightOf="@+id/lrcDecreaseIconParent">
+
+                <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+                    android:id="@+id/lrcResetIconParent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="true">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:text="重置"
+                        android:textColor="@color/def_bar_title_color"></TextView>
+
+                </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+
+            </RelativeLayout>
+
+
+            <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+                android:id="@+id/lrcIncreaseIconParent"
+                android:layout_width="75dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:clickable="true">
+
+                <com.zhangliangming.hp.ui.widget.BaseImageView
+                    android:id="@+id/lrcIncreaseIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lyric_progress_increase_icon"
+                    android:textColor="@color/def_bar_title_color"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/lrcIncreaseIcon"
+                    android:text="+0.5秒"
+                    android:textColor="@color/def_bar_title_color"></TextView>
+
+            </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.3dip"
+            android:background="@color/def_bar_title_color" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/fontSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="字体大小"
+                android:textColor="@color/def_bar_title_color"></TextView>
+
+            <com.zhangliangming.hp.ui.widget.BaseImageView
+                android:id="@+id/lyric_decrease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/fontSize"
+                android:text="@string/lyric_font_size_decrease_icon"
+                android:textColor="@color/def_bar_title_color"
+                android:textSize="20dp" />
+
+            <com.zhangliangming.hp.ui.widget.LrcSeekBar
+                android:id="@+id/fontSizeSeekBar"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@+id/lyric_increase"
+                android:layout_toRightOf="@+id/lyric_decrease"
+                android:max="50"
+                android:progress="0" />
+
+            <com.zhangliangming.hp.ui.widget.BaseImageView
+                android:id="@+id/lyric_increase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/lyric_font_size_increase_icon"
+                android:textColor="@color/def_bar_title_color"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.3dip"
+            android:background="@color/def_bar_title_color" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/fontColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="字体颜色"
+                android:textColor="@color/def_bar_title_color"></TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/fontColor"
+                android:orientation="horizontal">
+
+                <com.zhangliangming.hp.ui.widget.ColorRelativeLayout
+                    android:id="@+id/colorPanel0"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"></com.zhangliangming.hp.ui.widget.ColorRelativeLayout>
+
+                <com.zhangliangming.hp.ui.widget.ColorRelativeLayout
+                    android:id="@+id/colorPanel1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"></com.zhangliangming.hp.ui.widget.ColorRelativeLayout>
+
+                <com.zhangliangming.hp.ui.widget.ColorRelativeLayout
+                    android:id="@+id/colorPanel2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"></com.zhangliangming.hp.ui.widget.ColorRelativeLayout>
+
+                <com.zhangliangming.hp.ui.widget.ColorRelativeLayout
+                    android:id="@+id/colorPanel3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"></com.zhangliangming.hp.ui.widget.ColorRelativeLayout>
+
+                <com.zhangliangming.hp.ui.widget.ColorRelativeLayout
+                    android:id="@+id/colorPanel4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"></com.zhangliangming.hp.ui.widget.ColorRelativeLayout>
+
+                <com.zhangliangming.hp.ui.widget.ColorRelativeLayout
+                    android:id="@+id/colorPanel5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"></com.zhangliangming.hp.ui.widget.ColorRelativeLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.3dip"
+            android:background="@color/def_bar_title_color" />
+
+        <com.zhangliangming.hp.ui.widget.PressedRelativeLayout
+            android:id="@+id/cancelMenuButtonParent"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:clickable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="关闭"
+                android:textColor="@color/def_bar_title_color"></TextView>
+        </com.zhangliangming.hp.ui.widget.PressedRelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_scaning"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.zhangliangming.hp.ui.ScaningActivity">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@mipmap/img_mediascan_logo" />
+
+    <RelativeLayout
+        android:id="@+id/foot"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#2fa6de">
+
+        <RelativeLayout
+            android:id="@+id/scaning"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/scaningTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:text="已找到歌曲0首"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/scaningPathTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scaningTip"
+                android:layout_marginTop="15dp"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:text="/SDCard/"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+
+
+            <com.zhangliangming.hp.ui.widget.BaseColorImageButton
+                android:id="@+id/scanFinishButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scaningTip"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:text="@string/finish_icon"
+                android:textSize="35dp" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
