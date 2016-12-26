@@ -733,9 +733,13 @@ public class LrcActivity extends BaseActivity implements Observer {
                         Constants.lrcFontSize = Constants.lrcFontMinSize
                                 + fontSizeSeekBar.getProgress();
 
+                        SongInfo songInfo = MediaManage.getMediaManage(getApplicationContext()).getSongInfo();
                         // 通知歌词界面去刷新view
-
-                        manyLineLyricsView.setFontSize();
+                        if (songInfo != null && manyLineLyricsView.getHasLrc()) {
+                            manyLineLyricsView.setFontSize((int)songInfo.getPlayProgress());
+                        }else {
+                            manyLineLyricsView.setFontSize();
+                        }
 
                         new Thread() {
 
@@ -959,7 +963,7 @@ public class LrcActivity extends BaseActivity implements Observer {
 
             @Override
             protected void onPostExecute(String result) {
-                lyricsLineTreeMap = lyricsParser.getLyricsLineTreeMap();
+                lyricsLineTreeMap = lyricsParser.getDefLyricsLineTreeMap();
                 if (lyricsLineTreeMap != null && lyricsLineTreeMap.size() != 0) {
                     manyLineLyricsView.init(lyricsParser);
                     manyLineLyricsView.setHasLrc(true);

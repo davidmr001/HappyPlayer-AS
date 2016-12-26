@@ -179,6 +179,13 @@ public class ManyLineLyricsView extends View {
      */
     private ValueAnimator flingAnimator;
 
+    //-----------//
+    /**
+     * 判断歌词集合是否在重构
+     */
+    private boolean isReconstruct = false;
+    //-----------//
+
     public ManyLineLyricsView(Context context) {
         super(context);
         init(context);
@@ -840,7 +847,7 @@ public class ManyLineLyricsView extends View {
     public void init(LyricsParserUtil lyricsParser) {
 
         this.lyricsParser = lyricsParser;
-        lyricsLineTreeMap = lyricsParser.getLyricsLineTreeMap();
+        lyricsLineTreeMap = lyricsParser.getReconstructLyricsLineTreeMap(getMeasuredWidth(), paint);
 
         //初始化数据
         lyricsLineNum = -1;
@@ -859,7 +866,7 @@ public class ManyLineLyricsView extends View {
      * @param curPlayingTime
      */
     public void showLrc(int curPlayingTime) {
-        if (lyricsParser == null)
+        if (lyricsParser == null || isReconstruct)
             return;
         //添加歌词时间补偿值
         curPlayingTime += lyricsParser.getPlayOffset();
@@ -997,6 +1004,21 @@ public class ManyLineLyricsView extends View {
         invalidateView();
     }
 
+    /***
+     * 设置字体大小
+     */
+    public void setFontSize(int curPlayingTime) {
+        isReconstruct = true;
+        initFontSize();
+        lyricsLineTreeMap = lyricsParser.getReconstructLyricsLineTreeMap(getMeasuredWidth(), paint);
+        //添加歌词时间补偿值
+        curPlayingTime += lyricsParser.getPlayOffset();
+        int newLyricsLineNum = lyricsParser
+                .getLineNumber(curPlayingTime);
+        offsetY = newLyricsLineNum * getLineHeight(paint);
+        isReconstruct = false;
+        showLrc(curPlayingTime);
+    }
     /***
      * 设置字体大小
      */
