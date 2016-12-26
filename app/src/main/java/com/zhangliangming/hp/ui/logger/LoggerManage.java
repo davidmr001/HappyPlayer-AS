@@ -34,7 +34,7 @@ public class LoggerManage {
      * @return
      */
     public static LoggerManage getLogger(String userName) {
-        LoggerManage userLogger = (LoggerManage) sLoggerTable.get(userName);
+        LoggerManage userLogger = sLoggerTable.get(userName);
         if (userLogger == null) {
             userLogger = new LoggerManage(userName);
             sLoggerTable.put(userName, userLogger);
@@ -50,7 +50,7 @@ public class LoggerManage {
      */
     public static LoggerManage getZhangLogger(Context mContext) {
         String name = "zhangliangming";
-        LoggerManage userLogger = (LoggerManage) sLoggerTable.get(name);
+        LoggerManage userLogger = sLoggerTable.get(name);
         if (userLogger == null) {
             userLogger = new LoggerManage(name);
             sLoggerTable.put(name, userLogger);

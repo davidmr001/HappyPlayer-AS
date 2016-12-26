@@ -115,7 +115,6 @@ public class MainActivity extends BaseActivity implements Observer {
 
                 playBarPlayParent.setVisibility(View.VISIBLE);
                 pauseBarPlayParent.setVisibility(View.INVISIBLE);
-                ;
 
 
                 return;
@@ -405,12 +404,7 @@ public class MainActivity extends BaseActivity implements Observer {
                 msg.obj = songMessageTemp;
                 songInfoHandler.sendMessage(msg);
             } else if (songMessageTemp.getType() == SongMessage.DESLRCLOCKORUNLOCK) {
-                if (Constants.desktopLyricsIsMove) {
-                    // 解锁
-                    Constants.desktopLyricsIsMove = false;
-                } else {
-                    Constants.desktopLyricsIsMove = true;
-                }
+                Constants.desktopLyricsIsMove = !Constants.desktopLyricsIsMove;
 
                 DataUtil.saveValue(MainActivity.this,
                         Constants.desktopLyricsIsMove_KEY,

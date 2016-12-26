@@ -16,7 +16,6 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
 import com.happy.lyrics.model.LyricsLineInfo;
@@ -772,7 +771,7 @@ public class ManyLineLyricsView extends View {
             }
         });
         flingAnimator.setDuration(duration);
-        flingAnimator.setInterpolator(new DecelerateInterpolator());
+        flingAnimator.setInterpolator(new LinearInterpolator());
         flingAnimator.start();
     }
 

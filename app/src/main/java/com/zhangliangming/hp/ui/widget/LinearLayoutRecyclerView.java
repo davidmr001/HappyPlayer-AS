@@ -141,7 +141,7 @@ public class LinearLayoutRecyclerView extends RecyclerView {
 	}
 
 	public interface OnLinearLayoutRecyclerViewScrollListener {
-		public void onScrollEnd(int firstIndex);
+		void onScrollEnd(int firstIndex);
 	}
 
 }

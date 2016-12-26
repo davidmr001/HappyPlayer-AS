@@ -70,15 +70,15 @@ public class StorageListUtil {
 				StorageInfo info = null;
 				for (int i = 0; i < invokes.length; i++) {
 					Object obj = invokes[i];
-					Method getPath = obj.getClass().getMethod("getPath",
-							new Class[0]);
-					String path = (String) getPath.invoke(obj, new Object[0]);
+					Method getPath = obj.getClass().getMethod("getPath"
+					);
+					String path = (String) getPath.invoke(obj);
 					info = new StorageInfo(path);
 					File file = new File(info.path);
 					if ((file.exists()) && (file.isDirectory())
 							&& (file.canWrite())) {
 						Method isRemovable = obj.getClass().getMethod(
-								"isRemovable", new Class[0]);
+								"isRemovable");
 						String state = null;
 						try {
 							Method getVolumeState = StorageManager.class
@@ -92,7 +92,7 @@ public class StorageListUtil {
 
 						if (info.isMounted()) {
 							info.isRemoveable = ((Boolean) isRemovable.invoke(
-									obj, new Object[0])).booleanValue();
+									obj)).booleanValue();
 							storagges.add(info);
 						}
 					}
