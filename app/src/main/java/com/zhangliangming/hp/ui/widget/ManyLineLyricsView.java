@@ -16,10 +16,13 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
 import com.happy.lyrics.model.LyricsLineInfo;
 import com.happy.lyrics.utils.TimeUtils;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.ValueAnimator;
 import com.zhangliangming.hp.ui.R;
 import com.zhangliangming.hp.ui.common.Constants;
@@ -172,6 +175,10 @@ public class ManyLineLyricsView extends View {
      * 纵轴上的滑动速度
      */
     private float mVelocity;
+    /**
+     *
+     */
+    private ValueAnimator flingAnimator;
 
     public ManyLineLyricsView(Context context) {
         super(context);
@@ -635,6 +642,7 @@ public class ManyLineLyricsView extends View {
      * 手势抬起执行事件
      */
     private void actionUp(MotionEvent event) {
+
         //
         releaseVelocityTracker();
         //发送隐藏指示器
@@ -666,14 +674,18 @@ public class ManyLineLyricsView extends View {
             int deltaY = (int) offsetY - mDistance;
 
             if (deltaY < 0) {
-                deltaY = 0;
+                //使产生阻尼效果
+                deltaY = -2 * getLineHeight(paint);
             } else if (deltaY > lineHeight * (lineCount - 1)) {
-                deltaY = lineHeight * (lineCount - 1);
+                //使产生阻尼效果
+                deltaY = lineHeight * (lineCount + 1);
             }
             //
             flingAnimator(deltaY);
 
+            return;
         }
+
 
         //判断是否在滑动和是否点击了播放按钮
         if (isScroll && playClick(event)) {
@@ -722,20 +734,46 @@ public class ManyLineLyricsView extends View {
      */
     private void flingAnimator(int deltaY) {
 
+        if (flingAnimator != null) {
+
+            if (flingAnimator.isRunning()) {
+                flingAnimator.removeAllListeners();
+                flingAnimator.cancel();
+            }
+            flingAnimator = null;
+        }
+
         //使用开源动画库nineoldandroids来兼容api11之前的版本
-        ValueAnimator animator = ValueAnimator.ofFloat(offsetY, deltaY);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        flingAnimator = ValueAnimator.ofFloat(offsetY, deltaY);
+        flingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
+
+                if (isActionDown) return;
 
                 offsetY = (float) valueAnimator.getAnimatedValue();
                 invalidateView();
 
             }
         });
-        animator.setDuration(duration);
-        animator.setInterpolator(new LinearInterpolator());
-        animator.start();
+        flingAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (isActionDown) return;
+                int lineCount = lyricsLineTreeMap.size();
+                int lineHeight = getLineHeight(paint);
+                if (offsetY < 0) {
+                    //阻尼回弹
+                    flingAnimator(0);
+                } else if (offsetY > lineHeight * (lineCount - 1)) {
+                    //阻尼回弹
+                    flingAnimator(lineHeight * (lineCount - 1));
+                }
+            }
+        });
+        flingAnimator.setDuration(duration);
+        flingAnimator.setInterpolator(new DecelerateInterpolator());
+        flingAnimator.start();
     }
 
     /**
