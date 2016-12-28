@@ -156,10 +156,10 @@ public class LyricsParserUtil {
         while (it.hasNext()) {
             lyricsLineTreeMap.put(index++, lyricsLineInfosTemp.get(it.next()));
         }
-        for (int i = 0; i < lyricsLineTreeMap.size(); i++) {
-            LyricsLineInfo lyricsLineInfo = lyricsLineTreeMap.get(i);
-            System.out.println(lyricsLineInfo.getStartTimeStr() + "   " + lyricsLineInfo.getEndTimeStr() + "  " + lyricsLineInfo.getLineLyrics());
-        }
+//        for (int i = 0; i < lyricsLineTreeMap.size(); i++) {
+//            LyricsLineInfo lyricsLineInfo = lyricsLineTreeMap.get(i);
+//            System.out.println(lyricsLineInfo.getStartTimeStr() + "   " + lyricsLineInfo.getEndTimeStr() + "  " + lyricsLineInfo.getLineLyrics());
+//        }
 
         return lyricsLineTreeMap;
     }
