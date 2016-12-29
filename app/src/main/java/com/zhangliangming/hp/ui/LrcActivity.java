@@ -776,6 +776,7 @@ public class LrcActivity extends BaseActivity implements Observer {
                 String lrcFilePath = Constants.PATH_LYRICS + File.separator + mSongInfo.getDisplayName() + "." + lyricsInfo.getLyricsFileExt();
 
                 Map<String, Object> tags = lyricsInfo.getLyricsTags();
+                System.out.println(lyricsParser.getPlayOffset());
                 tags.put(LyricsTag.TAG_OFFSET, lyricsParser.getPlayOffset());
                 lyricsInfo.setLyricsTags(tags);
 
