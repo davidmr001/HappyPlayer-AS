@@ -9,6 +9,10 @@ mp3、ape、flac、wav等
 
 
 - hrc歌词：happy lyrics歌词，乐乐音乐4.0自定义的动感歌词格式，可准确到歌词每个字。
+
+- krc歌词，酷狗歌词。（记得将歌词文件名修改为歌曲的名称哦，不然会找不到。。。）
+（歌词文件要放在haplayer文件夹下的lyrics文件夹下，要不也会找不到的。。。。。）
+
 #完成功能
 
 - 音频播放、定位播放
@@ -24,6 +28,7 @@ https://github.com/zhangliangming/HappyPlayer-PC.git
 
 #测试资源地址
 将haplayer文件夹放到手机sd卡下，即可。附：http://pan.baidu.com/s/1pLtXVCJ
+
 
 #效果预览
 - ![](http://i.imgur.com/p3kkE0p.png)
