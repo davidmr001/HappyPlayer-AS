@@ -676,7 +676,7 @@ public class ManyLineLyricsView extends View {
             //获取距离
             double totalDistance = getSplineFlingDistance((int) mVelocity);
             //缩小距离
-            int mDistance = (int) (totalDistance * Math.signum(mVelocity)) / 2;
+            int mDistance = (int) (totalDistance * Math.signum(mVelocity)) / 1;
             int deltaY = (int) offsetY - mDistance;
 
             if (deltaY < 0) {
