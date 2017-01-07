@@ -36,4 +36,8 @@ https://github.com/zhangliangming/HappyPlayer-PC.git
 - ![](http://i.imgur.com/kcOQ2Ti.png)
 - ![](http://i.imgur.com/7UwShO5.gif)
 - ![](http://i.imgur.com/Egwcfxs.gif)
-- ![](http://i.imgur.com/2AWctNB.gif)
+
+#参考博客
+- http://www.jianshu.com/p/576cbf43053e
+- http://www.cnblogs.com/tianzhijiexian/p/4297664.html
+- http://www.eoeandroid.com/forum.php?mod=viewthread&tid=541010

@@ -111,7 +111,7 @@ public class ManyLineLyricsView extends View {
     /**
      * Y轴移动的时间
      */
-    private int duration = 350;
+    private int duration = 400;
 
     /**
      * 歌词在Y轴上的偏移量
@@ -135,6 +135,14 @@ public class ManyLineLyricsView extends View {
      * 字体的高度进行微调
      */
     private int adjustmentNum = 5;
+    /**
+     * 字体透明梯度值
+     */
+    private int alphaAdjustmentNum = 15;
+    /**
+     * 距离当前行歌词，第几行开始进行透明梯度
+     */
+    private int alphaStartLine = 2;
 
     //以下为歌词滚动的参数
     /**
@@ -332,7 +340,7 @@ public class ManyLineLyricsView extends View {
         int playY = (getMeasuredHeight() - playH) / 2;
 
         //按钮微调，增加击中的概率
-        int rectAdjustmentNum = 20;
+        int rectAdjustmentNum = 25;
         playRect = new Rect();
         playRect.left = playX - rectAdjustmentNum;
         playRect.right = (int) (playX + playW) + rectAdjustmentNum;
@@ -393,10 +401,17 @@ public class ManyLineLyricsView extends View {
             float textY = centY
                     - (lyricsLineNum - i) * getLineHeight(paint);
 
-            //超出视图的不再绘画
-            if (textY < getLineHeight(paint)) {
+            //超出上视图
+            if (textY < getLineHeight(paint) + spaceLineHeight) {
                 break;
             }
+            //超出下视图
+            if (textY + getLineHeight(paint) + spaceLineHeight > getHeight()) {
+                continue;
+            }
+            if (Math.abs(getScrollLrcLineNum() - i) > alphaStartLine)
+                paint.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - i) * alphaAdjustmentNum), 0));
+            else paint.setAlpha(255);
             canvas.drawText(text, textX, textY, paint);
         }
 
@@ -406,7 +421,6 @@ public class ManyLineLyricsView extends View {
         //绘画当前行的动感歌词
         drawDGLineLrc(canvas, centY);
 
-
         // 画当前歌词之后的歌词
         for (int i = lyricsLineNum + 1; i < lyricsLineTreeMap.size(); i++) {
             String text = lyricsLineTreeMap.get(i).getLineLyrics();
@@ -415,11 +429,17 @@ public class ManyLineLyricsView extends View {
             float textY = centY
                     + (i - lyricsLineNum) * getLineHeight(paint);
 
-            //超出视图的不再绘画
-            if (textY + getLineHeight(paint) > getHeight()) {
+            //超出上视图
+            if (textY < getLineHeight(paint) + spaceLineHeight) {
+                continue;
+            }
+            //超出下视图
+            if (textY + getLineHeight(paint) + spaceLineHeight > getHeight()) {
                 break;
             }
-
+            if (Math.abs(getScrollLrcLineNum() - i) > alphaStartLine)
+                paint.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - i) * alphaAdjustmentNum), 0));
+            else paint.setAlpha(255);
             canvas.drawText(text, textX, textY, paint);
 
         }
@@ -432,6 +452,13 @@ public class ManyLineLyricsView extends View {
      * @param curTextY
      */
     private void drawDGLineLrc(Canvas canvas, float curTextY) {
+
+        //超出视图
+        if (curTextY < getLineHeight(paint) + spaceLineHeight || curTextY + getLineHeight(paint) + spaceLineHeight > getHeight()) {
+            return;
+        }
+
+
         LyricsLineInfo lyricsLineInfo = lyricsLineTreeMap
                 .get(lyricsLineNum);
         // 整行歌词
@@ -474,6 +501,10 @@ public class ManyLineLyricsView extends View {
         // save和restore是为了剪切操作不影响画布的其它元素
         canvas.save();
 
+        // 设置颜色透明度
+        if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
+            paintHLDEF.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
+        else paintHLDEF.setAlpha(255);
         // 画当前歌词
         canvas.drawText(lineLyrics, curTextX, curTextY, paintHLDEF);
 
@@ -482,6 +513,10 @@ public class ManyLineLyricsView extends View {
         canvas.clipRect(curTextX, curTextY - Math.abs(textHeight) - adjustmentNum, curTextX + lineLyricsHLEDWidth,
                 curTextY + Math.abs(textHeight) + adjustmentNum);
 
+        //
+        if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
+            paintHLED.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
+        else paintHLED.setAlpha(255);
         // 画当前歌词
         canvas.drawText(lineLyrics, curTextX, curTextY, paintHLED);
         canvas.restore();
@@ -495,10 +530,20 @@ public class ManyLineLyricsView extends View {
      * @param curTextY
      */
     private void drawCurLineLrc(Canvas canvas, float curTextY) {
+
+        //超出视图
+        if (curTextY < getLineHeight(paint) + spaceLineHeight || curTextY + getLineHeight(paint) + spaceLineHeight > getHeight()) {
+            return;
+        }
+
         //画当前的行歌词
         String curText = lyricsLineTreeMap.get(lyricsLineNum).getLineLyrics();
         float curTextWidth = paintHLED.measureText(curText);
         float curTextX = (getWidth() - curTextWidth) / 2;
+
+        if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
+            paintHLED.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
+        else paintHLED.setAlpha(255);
         canvas.drawText(curText, curTextX, curTextY, paintHLED);
     }
 
@@ -626,17 +671,25 @@ public class ManyLineLyricsView extends View {
         int lineCount = lyricsLineTreeMap.size();
         int lineHeight = getLineHeight(paint);
 
-        float scrollY = lastScrollY + downY - event.getY();
-        //滚动到第一行歌词和最后一行歌词
-        if (scrollY < 0 || scrollY > lineHeight * lineCount) {
-            //除以3使产生阻尼效果
-            offsetY = lastScrollY + (downY - event.getY()) / 3;
-        } else {
-            offsetY = scrollY;
-        }
+        //
+        float scrollY = lastScrollY + downY - event.getY();   // 102  -2  58  42
+        float value01 = scrollY - (lineCount * lineHeight * 0.5f);   // 52  -52  8  -8
+        float value02 = ((Math.abs(value01) - (lineCount * lineHeight * 0.5f)));   // 2  2  -42  -42
+        offsetY = value02 > 0 ? scrollY - (measureDampingDistance(value02) * value01 / Math.abs(value01)) : scrollY;   //   value01 / Math.abs(value01)  控制滑动方向
+
+        //
         final VelocityTracker velocityTracker = mVelocityTracker;
         velocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
         mVelocity = (int) velocityTracker.getYVelocity();
+    }
+
+    /**
+     * 计算阻尼效果的大小
+     */
+    private final int mMaxDampingDistance = 360;
+
+    private float measureDampingDistance(float value02) {
+        return value02 > mMaxDampingDistance ? (mMaxDampingDistance * 0.6f + (value02 - mMaxDampingDistance) * 0.72f) : value02 * 0.6f;
     }
 
     /**
@@ -648,7 +701,6 @@ public class ManyLineLyricsView extends View {
      * 手势抬起执行事件
      */
     private void actionUp(MotionEvent event) {
-
         //
         releaseVelocityTracker();
         //发送隐藏指示器
@@ -676,7 +728,7 @@ public class ManyLineLyricsView extends View {
             //获取距离
             double totalDistance = getSplineFlingDistance((int) mVelocity);
             //缩小距离
-            int mDistance = (int) (totalDistance * Math.signum(mVelocity)) / 1;
+            int mDistance = (int) (totalDistance * Math.signum(mVelocity)) / 2;
             int deltaY = (int) offsetY - mDistance;
 
             if (deltaY < 0) {
@@ -684,7 +736,7 @@ public class ManyLineLyricsView extends View {
                 deltaY = -2 * getLineHeight(paint);
             } else if (deltaY > lineHeight * (lineCount - 1)) {
                 //使产生阻尼效果
-                deltaY = lineHeight * (lineCount + 1);
+                deltaY = lineHeight * (lineCount +1);
             }
             //
             flingAnimator(deltaY);
@@ -756,7 +808,6 @@ public class ManyLineLyricsView extends View {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
 
                 if (isActionDown) return;
-
                 offsetY = (float) valueAnimator.getAnimatedValue();
                 invalidateView();
 
@@ -865,7 +916,7 @@ public class ManyLineLyricsView extends View {
      *
      * @param curPlayingTime
      */
-    public void showLrc(int curPlayingTime) {
+    public synchronized void showLrc(int curPlayingTime) {
         if (lyricsParser == null || isReconstruct)
             return;
         //添加歌词时间补偿值
@@ -1007,7 +1058,7 @@ public class ManyLineLyricsView extends View {
     /***
      * 设置字体大小
      */
-    public void setFontSize(int curPlayingTime) {
+    public synchronized void setFontSize(int curPlayingTime) {
         isReconstruct = true;
         initFontSize();
         lyricsLineTreeMap = lyricsParser.getReconstructLyricsLineTreeMap(getMeasuredWidth(), paint);
@@ -1016,9 +1067,14 @@ public class ManyLineLyricsView extends View {
         int newLyricsLineNum = lyricsParser
                 .getLineNumber(curPlayingTime);
         offsetY = newLyricsLineNum * getLineHeight(paint);
+        if (newLyricsLineNum != lyricsLineNum) {
+            lyricsLineNum = newLyricsLineNum;
+        }
+        invalidateView();
         isReconstruct = false;
         showLrc(curPlayingTime);
     }
+
     /***
      * 设置字体大小
      */
