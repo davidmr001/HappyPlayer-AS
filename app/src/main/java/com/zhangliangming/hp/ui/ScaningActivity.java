@@ -173,14 +173,8 @@ public class ScaningActivity extends BaseActivity {
                         if (!f.exists()) {
                             continue;
                         }
-                        // 文件名
-                        String displayName = f.getName();
-                        if (displayName.endsWith(Extension)) {
-                            displayName = MediaUtils.removeExt(displayName);
-                        }
-
                         boolean isExists = SongDB.getSongInfoDB(this)
-                                .songIsExists(displayName);
+                                .songIsExists(f.getPath());
                         if (isExists) {
                             continue;
                         }

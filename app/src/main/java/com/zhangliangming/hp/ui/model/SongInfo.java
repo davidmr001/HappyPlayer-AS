@@ -66,9 +66,6 @@ public class SongInfo  implements Serializable {
 	private String singerPIC = "";// 歌手写真图片下载路径
 	private String kscUrl = "";// 歌词文件下载路径
 	private String fileExt = ""; //歌曲类型
-	// private String singerPIC1 = ""; // 歌手写真图片1
-	// private String singerPIC2 = ""; // 歌手写真图片2
-	// private String singerPIC3 = ""; // 歌手写真图片3
 
 	private long playProgress;// 播放的进度
 
@@ -197,31 +194,6 @@ public class SongInfo  implements Serializable {
 	public void setAlbumUrl(String albumUrl) {
 		this.albumUrl = albumUrl;
 	}
-
-	//
-	// public String getSingerPIC1() {
-	// return singerPIC1;
-	// }
-	//
-	// public void setSingerPIC1(String singerPIC1) {
-	// this.singerPIC1 = singerPIC1;
-	// }
-	//
-	// public String getSingerPIC2() {
-	// return singerPIC2;
-	// }
-	//
-	// public void setSingerPIC2(String singerPIC2) {
-	// this.singerPIC2 = singerPIC2;
-	// }
-	//
-	// public String getSingerPIC3() {
-	// return singerPIC3;
-	// }
-	//
-	// public void setSingerPIC3(String singerPIC3) {
-	// this.singerPIC3 = singerPIC3;
-	// }
 
 	public String getSingerPIC() {
 		return singerPIC;

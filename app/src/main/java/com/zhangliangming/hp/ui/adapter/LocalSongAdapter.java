@@ -1,6 +1,7 @@
 package com.zhangliangming.hp.ui.adapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -22,11 +23,14 @@ import com.zhangliangming.hp.ui.R;
 import com.zhangliangming.hp.ui.common.Constants;
 import com.zhangliangming.hp.ui.logger.LoggerManage;
 import com.zhangliangming.hp.ui.manage.MediaManage;
+import com.zhangliangming.hp.ui.model.AudioInfo;
 import com.zhangliangming.hp.ui.model.Category;
 import com.zhangliangming.hp.ui.model.SongInfo;
 import com.zhangliangming.hp.ui.model.SongMessage;
 import com.zhangliangming.hp.ui.observable.ObserverManage;
+import com.zhangliangming.hp.ui.util.AudioInfoUtil;
 import com.zhangliangming.hp.ui.util.DataUtil;
+import com.zhangliangming.hp.ui.util.DateUtil;
 import com.zhangliangming.hp.ui.widget.ListItemRelativeLayout;
 
 
@@ -90,7 +94,7 @@ public class LocalSongAdapter extends Adapter<ViewHolder> implements Observer {
                 if (songMessage.getSongInfo() != null) {
                     addMusic(songMessage.getSongInfo());
                 }
-            }else if (songMessage.getType() == SongMessage.SCANEDMUSIC) {
+            } else if (songMessage.getType() == SongMessage.SCANEDMUSIC) {
                 notifyDataSetChanged();
             }
         }
@@ -124,9 +128,12 @@ public class LocalSongAdapter extends Adapter<ViewHolder> implements Observer {
 
             if (categoryChar == tempCategory) {
 
-                List<SongInfo> lists = category.getmCategoryItem();
+                List<AudioInfo> lists = category.getmCategoryItem();
                 if (lists.size() == 0) {
-                    lists.add(songInfo);
+
+                    AudioInfo audioInfo = AudioInfoUtil.getAudioInfo(songInfo);
+                    if (audioInfo != null)
+                        lists.add(audioInfo);
 
                     if (categoryChar == '^') {
                         categoryChar = '#';
@@ -139,12 +146,15 @@ public class LocalSongAdapter extends Adapter<ViewHolder> implements Observer {
 
                 } else {
                     for (int i = 0; i < lists.size(); i++) {
-                        SongInfo tempSongInfo = lists.get(i);
+                        SongInfo tempSongInfo = lists.get(i).getSongInfo();
                         String tempChildCategory = tempSongInfo
                                 .getChildCategory();
 
                         if (childCategory.compareTo(tempChildCategory) < 0) {
-                            lists.add(i, songInfo);
+
+                            AudioInfo audioInfo = AudioInfoUtil.getAudioInfo(songInfo);
+                            if (audioInfo != null)
+                                lists.add(i, audioInfo);
 
                             if (categoryChar == '^') {
                                 categoryChar = '#';
@@ -158,7 +168,9 @@ public class LocalSongAdapter extends Adapter<ViewHolder> implements Observer {
 
                             break;
                         } else if (i == lists.size() - 1) {
-                            lists.add(songInfo);
+                            AudioInfo audioInfo = AudioInfoUtil.getAudioInfo(songInfo);
+                            if (audioInfo != null)
+                                lists.add(audioInfo);
 
                             if (categoryChar == '^') {
                                 categoryChar = '#';
@@ -184,8 +196,11 @@ public class LocalSongAdapter extends Adapter<ViewHolder> implements Observer {
                     categoryChar = '#';
                 }
                 Category categoryTemp = new Category(categoryChar + "");
-                List<SongInfo> lists = new ArrayList<SongInfo>();
-                lists.add(songInfo);
+                List<AudioInfo> lists = new ArrayList<AudioInfo>();
+
+                AudioInfo audioInfo = AudioInfoUtil.getAudioInfo(songInfo);
+                if (audioInfo != null)
+                    lists.add(audioInfo);
                 categoryTemp.setmCategoryItem(lists);
                 categorys.add(j, categoryTemp);
 
@@ -292,6 +307,8 @@ public class LocalSongAdapter extends Adapter<ViewHolder> implements Observer {
 
                     @Override
                     public void onClick(View arg0) {
+
+                        System.out.println("zhangliang setOnClickListener : " + DateUtil.dateToString(new Date()));
                         if (playIndexPosition == position) {
 
                             if (MediaManage.getMediaManage(context)
@@ -376,12 +393,18 @@ public class LocalSongAdapter extends Adapter<ViewHolder> implements Observer {
         int count = 0;
         for (int i = 0; i < categorys.size(); i++) {
             Category category = categorys.get(i);
-            List<SongInfo> songInfos = category.getCategoryItem();
+
+
+            List<AudioInfo> songInfos = category.getCategoryItem();
             int j = 0;
             for (; j < songInfos.size(); j++) {
-                if (songInfos.get(j).getSid().equals(songInfo.getSid())) {
+                if (songInfos.get(j).getSongInfo().getSid().equals(songInfo.getSid())) {
                     songInfos.remove(j);
-                    songInfos.add(j, songInfo);
+
+                    AudioInfo audioInfo = AudioInfoUtil.getAudioInfo(songInfo);
+                    if (audioInfo != null)
+
+                        songInfos.add(j, audioInfo);
 
                     categorys.remove(i);
                     category.setmCategoryItem(songInfos);
@@ -602,10 +625,12 @@ public class LocalSongAdapter extends Adapter<ViewHolder> implements Observer {
         int count = 0;
         for (int i = 0; i < categorys.size(); i++) {
             Category category = categorys.get(i);
-            List<SongInfo> songInfos = category.getCategoryItem();
+
+
+            List<AudioInfo> songInfos = category.getCategoryItem();
             int j = 0;
             for (; j < songInfos.size(); j++) {
-                if (songInfos.get(j).getSid().equals(sid)) {
+                if (songInfos.get(j).getSongInfo().getSid().equals(sid)) {
 
                     index = count + j + 1;
 

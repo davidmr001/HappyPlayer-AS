@@ -270,10 +270,8 @@ public class LyricsParserUtil {
         String[] newLyricsWords = lyricsWordsList
                 .toArray(new String[lyricsWordsList.size()]);
         int newWordsDisInterval[] = getWordsDisIntervalList(wordsDisIntervalList);
-        newLyricsLineInfo.setEndTimeStr(TimeUtils.parseString(endTime));
         newLyricsLineInfo.setEndTime(endTime);
         newLyricsLineInfo.setStartTime(startTime);
-        newLyricsLineInfo.setStartTimeStr(TimeUtils.parseString(startTime));
         newLyricsLineInfo.setLineLyrics(lineLyrics);
         newLyricsLineInfo.setLyricsWords(newLyricsWords);
         newLyricsLineInfo.setWordsDisInterval(newWordsDisInterval);

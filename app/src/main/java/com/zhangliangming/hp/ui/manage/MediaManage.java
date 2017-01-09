@@ -9,9 +9,11 @@ import java.util.Random;
 import android.content.Context;
 import android.content.Intent;
 
+import com.tulskiy.musique.model.TrackData;
 import com.zhangliangming.hp.ui.common.Constants;
 import com.zhangliangming.hp.ui.db.SongDB;
 import com.zhangliangming.hp.ui.logger.LoggerManage;
+import com.zhangliangming.hp.ui.model.AudioInfo;
 import com.zhangliangming.hp.ui.model.Category;
 import com.zhangliangming.hp.ui.model.SongInfo;
 import com.zhangliangming.hp.ui.model.SongMessage;
@@ -57,7 +59,7 @@ public class MediaManage implements Observer {
     /**
      * 播放列表-本地歌曲列表、网络歌曲列表、下载歌曲列表、搜索歌曲列表、我的最爱歌曲列表
      */
-    private List<SongInfo> playlist;
+    private List<AudioInfo> playlist;
     /**
      * 分类的所有歌曲列表
      */
@@ -102,6 +104,7 @@ public class MediaManage implements Observer {
 
     /**
      * 初始化本地歌曲列表
+     *
      * @param context
      * @return
      */
@@ -110,13 +113,13 @@ public class MediaManage implements Observer {
         List<String> categoryList = SongDB.getSongInfoDB(context).getAllLocalSongCategory();
         for (int i = 0; i < categoryList.size(); i++) {
             String categoryName = categoryList.get(i);
-            List<SongInfo> songInfos = SongDB.getSongInfoDB(context).getAllLocalCategorySong(
+            List<AudioInfo> audioInfos = SongDB.getSongInfoDB(context).getAllLocalCategorySong(
                     categoryName);
             if (categoryName.equals("^")) {
                 categoryName = "#";
             }
             Category category = new Category(categoryName);
-            category.setmCategoryItem(songInfos);
+            category.setmCategoryItem(audioInfos);
             lists.add(category);
         }
     }
@@ -240,7 +243,7 @@ public class MediaManage implements Observer {
                     return;
                 }
                 if (playlist.size() != 0) {
-                    songInfo = playlist.get(playIndex);
+                    songInfo = playlist.get(playIndex).getSongInfo();
                 } else {
                     stopToPlay();
                     return;
@@ -253,7 +256,7 @@ public class MediaManage implements Observer {
                 playIndex = new Random().nextInt(playlist.size());
 
                 if (playlist.size() != 0) {
-                    songInfo = playlist.get(playIndex);
+                    songInfo = playlist.get(playIndex).getSongInfo();
                 } else {
                     stopToPlay();
                     return;
@@ -267,7 +270,7 @@ public class MediaManage implements Observer {
                 }
 
                 if (playlist.size() != 0) {
-                    songInfo = playlist.get(playIndex);
+                    songInfo = playlist.get(playIndex).getSongInfo();
                 } else {
                     stopToPlay();
                     return;
@@ -353,7 +356,7 @@ public class MediaManage implements Observer {
                     return;
                 }
                 if (playlist.size() != 0) {
-                    songInfo = playlist.get(playIndex);
+                    songInfo = playlist.get(playIndex).getSongInfo();
                 } else {
                     stopToPlay();
                     return;
@@ -365,7 +368,7 @@ public class MediaManage implements Observer {
 
                 playIndex = new Random().nextInt(playlist.size());
                 if (playlist.size() != 0) {
-                    songInfo = playlist.get(playIndex);
+                    songInfo = playlist.get(playIndex).getSongInfo();
                 } else {
                     stopToPlay();
                     return;
@@ -380,7 +383,7 @@ public class MediaManage implements Observer {
                 }
 
                 if (playlist.size() != 0) {
-                    songInfo = playlist.get(playIndex);
+                    songInfo = playlist.get(playIndex).getSongInfo();
                 } else {
                     stopToPlay();
                     return;
@@ -568,12 +571,22 @@ public class MediaManage implements Observer {
     public int getPlayIndex() {
         int index = -1;
         for (int i = 0; i < playlist.size(); i++) {
-            SongInfo tempSongInfo = playlist.get(i);
+            SongInfo tempSongInfo = playlist.get(i).getSongInfo();
             if (tempSongInfo.getSid().equals(Constants.playInfoID)) {
                 return i;
             }
         }
         return index;
+    }
+
+    public TrackData getTrackData(SongInfo mSongInfo) {
+        for (int i = 0; i < playlist.size(); i++) {
+            SongInfo tempSongInfo = playlist.get(i).getSongInfo();
+            if (tempSongInfo.getSid().equals(mSongInfo.getSid())) {
+                return playlist.get(i).getTrackData();
+            }
+        }
+        return null;
     }
 
     public int getPlayListType() {
@@ -588,7 +601,7 @@ public class MediaManage implements Observer {
         this.songInfo = songInfo;
     }
 
-    public List<SongInfo> getPlaylist() {
+    public List<AudioInfo> getPlaylist() {
         return playlist;
     }
 

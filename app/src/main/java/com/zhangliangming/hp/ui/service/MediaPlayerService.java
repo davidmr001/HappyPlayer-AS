@@ -1,6 +1,6 @@
 package com.zhangliangming.hp.ui.service;
 
-import java.io.File;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,18 +10,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.tulskiy.musique.model.TrackData;
 import com.zhangliangming.hp.ui.common.Constants;
-import com.zhangliangming.hp.ui.db.SongDB;
 import com.zhangliangming.hp.ui.logger.LoggerManage;
 import com.zhangliangming.hp.ui.manage.MediaManage;
 import com.zhangliangming.hp.ui.model.SongInfo;
 import com.zhangliangming.hp.ui.model.SongMessage;
 import com.zhangliangming.hp.ui.observable.ObserverManage;
-import com.zlm.audio.AudioFileReader;
-import com.zlm.audio.model.AudioInfo;
+
 import com.zlm.audio.player.BasePlayer;
 import com.zlm.audio.player.BasePlayer.PlayEvent;
-import com.zlm.audio.util.AudioUtil;
+
 
 public class MediaPlayerService extends Service implements Observer {
     /**
@@ -193,9 +192,10 @@ public class MediaPlayerService extends Service implements Observer {
         }
 
         try {
-            AudioFileReader audioFileReader = AudioUtil
-                    .getAudioFileReaderByFileExt(songInfo.getFileExt());
-            if (audioFileReader == null) {
+
+            TrackData trackData = MediaManage.getMediaManage(context).getTrackData(songInfo);
+
+            if (trackData == null) {
                 // 播放出错，1秒过后，播放下一首
 
                 logger.e("歌曲格式不支持!");
@@ -211,17 +211,13 @@ public class MediaPlayerService extends Service implements Observer {
                 return;
             }
 
-            AudioInfo audioInfo = audioFileReader.read(new File(songInfo
-                    .getFilePath()));
-            // 更新audioInfo里面的文件数据
-            audioInfo.setFileSize(songInfo.getSize());
-            audioInfo.setFileSizeStr(songInfo.getSizeStr());
-            audioInfo.setFileExt(songInfo.getFileExt());
-            //
             if (songInfo.getPlayProgress() != 0) {
-                audioInfo.setPlayedProgress(songInfo.getPlayProgress());
+                trackData.setStartPosition(songInfo.getPlayProgress());
+            } else {
+                trackData.setStartPosition(0);
             }
-            player.open(audioInfo);
+            player.open(trackData);
+
             player.play();
 
         } catch (Exception e) {
