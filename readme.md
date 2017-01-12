@@ -54,3 +54,6 @@ https://github.com/zhangliangming/HappyPlayer-PC.git
 
 #大神的播放器（支持多种音频格式）
  java swing版本：https://github.com/tulskiy/musique.git
+
+ #博客地址
+ http://zhangliangming.github.io/
