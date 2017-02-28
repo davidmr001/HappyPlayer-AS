@@ -388,6 +388,7 @@ public class ManyLineLyricsView extends View {
      * @param canvas
      */
     private void drawLrcText(Canvas canvas) {
+
         //因为offsetY = 当前行 * getLineHeight(paint) ；所以为了让当前行可居中。。。。。
         //获取中间位置
         float centY = (getMeasuredHeight() - (int) getTextHeight(paintHLED)) / 2
@@ -409,9 +410,15 @@ public class ManyLineLyricsView extends View {
             if (textY + getLineHeight(paint) + spaceLineHeight > getHeight()) {
                 continue;
             }
-            if (Math.abs(getScrollLrcLineNum() - i) > alphaStartLine)
-                paint.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - i) * alphaAdjustmentNum), 0));
-            else paint.setAlpha(255);
+
+            int count = getHeight()/(getLineHeight(paint) + spaceLineHeight) + 1;
+            int alpha = 255-(255-100)/count * Math.abs(getScrollLrcLineNum() - i);
+            paint.setAlpha(alpha);
+
+
+            //   if (Math.abs(getScrollLrcLineNum() - i) > alphaStartLine)
+           //     paint.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - i) * alphaAdjustmentNum), 0));
+         //   else paint.setAlpha(255);
             canvas.drawText(text, textX, textY, paint);
         }
 
@@ -437,9 +444,14 @@ public class ManyLineLyricsView extends View {
             if (textY + getLineHeight(paint) + spaceLineHeight > getHeight()) {
                 break;
             }
-            if (Math.abs(getScrollLrcLineNum() - i) > alphaStartLine)
-                paint.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - i) * alphaAdjustmentNum), 0));
-            else paint.setAlpha(255);
+
+            int count = getHeight()/(getLineHeight(paint) + spaceLineHeight) + 1;
+            int alpha = 255-(255-100)/count * Math.abs(getScrollLrcLineNum() - i);
+            paint.setAlpha(alpha);
+
+          //  if (Math.abs(getScrollLrcLineNum() - i) > alphaStartLine)
+             //   paint.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - i) * alphaAdjustmentNum), 0));
+           // else paint.setAlpha(255);
             canvas.drawText(text, textX, textY, paint);
 
         }
@@ -502,9 +514,14 @@ public class ManyLineLyricsView extends View {
         canvas.save();
 
         // 设置颜色透明度
-        if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
-            paintHLDEF.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
-        else paintHLDEF.setAlpha(255);
+
+        int count = getHeight()/(getLineHeight(paint) + spaceLineHeight) + 1;
+        int alpha = 255-(255-100)/count * Math.abs(getScrollLrcLineNum() - lyricsLineNum);
+        paintHLDEF.setAlpha(alpha);
+
+      //  if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
+         //   paintHLDEF.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
+      //  else paintHLDEF.setAlpha(255);
         // 画当前歌词
         canvas.drawText(lineLyrics, curTextX, curTextY, paintHLDEF);
 
@@ -514,9 +531,12 @@ public class ManyLineLyricsView extends View {
                 curTextY + Math.abs(textHeight) + adjustmentNum);
 
         //
-        if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
-            paintHLED.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
-        else paintHLED.setAlpha(255);
+        //if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
+         //   paintHLED.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
+       // else paintHLED.setAlpha(255);
+
+        paintHLED.setAlpha(alpha);
+
         // 画当前歌词
         canvas.drawText(lineLyrics, curTextX, curTextY, paintHLED);
         canvas.restore();
@@ -541,9 +561,14 @@ public class ManyLineLyricsView extends View {
         float curTextWidth = paintHLED.measureText(curText);
         float curTextX = (getWidth() - curTextWidth) / 2;
 
-        if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
-            paintHLED.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
-        else paintHLED.setAlpha(255);
+        int count = getHeight()/(getLineHeight(paint) + spaceLineHeight) + 1;
+        int alpha = 255-(255-100)/count * Math.abs(getScrollLrcLineNum() - lyricsLineNum);
+        paintHLED.setAlpha(alpha);
+
+
+       // if (Math.abs(getScrollLrcLineNum() - lyricsLineNum) > alphaStartLine)
+       //     paintHLED.setAlpha(Math.max((255 - Math.abs(getScrollLrcLineNum() - lyricsLineNum) * alphaAdjustmentNum), 0));
+      //  else paintHLED.setAlpha(255);
         canvas.drawText(curText, curTextX, curTextY, paintHLED);
     }
 
