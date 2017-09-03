@@ -1,3 +1,6 @@
+重要信息：该版本不再维护，如需要可移步到新版本：https://github.com/zhangliangming/HappyPlayer5.git
+
+
 #乐乐音乐4.0简洁版
 开发环境：android studio
 #支持音频格式
